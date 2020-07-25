@@ -1,0 +1,30 @@
+{
+  "name": "Area",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "seat",
+      "otherEntityRelationshipName": "area",
+      "javadoc": "A relationship",
+      "relationshipName": "seats"
+    }
+  ],
+  "changelogDate": "20200725125921",
+  "entityTableName": "area",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

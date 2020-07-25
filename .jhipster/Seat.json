@@ -1,0 +1,77 @@
+{
+  "name": "Seat",
+  "fields": [
+    {
+      "fieldName": "number",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "SeatStatus",
+      "fieldValues": "BOOKED (Booked),AVAILABLE (Available)"
+    },
+    {
+      "fieldName": "aisleSeat",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "windowSeat",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "middleSeat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "seat",
+      "otherEntityRelationshipName": "seat",
+      "relationshipName": "rightSeat",
+      "otherEntityField": "number",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "seat",
+      "otherEntityRelationshipName": "seat",
+      "relationshipName": "leftSeat",
+      "otherEntityField": "number",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "seat",
+      "otherEntityRelationshipName": "seat",
+      "relationshipName": "frontSeat",
+      "otherEntityField": "number",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "seat",
+      "relationshipName": "reservation"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "area",
+      "otherEntityRelationshipName": "seats",
+      "relationshipName": "area",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200725130021",
+  "entityTableName": "seat",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

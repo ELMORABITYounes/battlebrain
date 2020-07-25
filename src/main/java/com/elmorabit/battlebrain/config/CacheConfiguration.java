@@ -48,6 +48,13 @@ public class CacheConfiguration {
             createCache(cm, com.elmorabit.battlebrain.domain.User.class.getName());
             createCache(cm, com.elmorabit.battlebrain.domain.Authority.class.getName());
             createCache(cm, com.elmorabit.battlebrain.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.elmorabit.battlebrain.domain.Team.class.getName());
+            createCache(cm, com.elmorabit.battlebrain.domain.Team.class.getName() + ".members");
+            createCache(cm, com.elmorabit.battlebrain.domain.Area.class.getName());
+            createCache(cm, com.elmorabit.battlebrain.domain.Area.class.getName() + ".seats");
+            createCache(cm, com.elmorabit.battlebrain.domain.Seat.class.getName());
+            createCache(cm, com.elmorabit.battlebrain.domain.Seat.class.getName() + ".reservations");
+            createCache(cm, com.elmorabit.battlebrain.domain.Reservation.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="seat">
+            <h2><span>Seat</span> {{ seat.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Number</span></dt>
+                <dd>
+                    <span>{{ seat.number }}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{ seat.status }}</span>
+                </dd>
+                <dt><span>Aisle Seat</span></dt>
+                <dd>
+                    <span>{{ seat.aisleSeat }}</span>
+                </dd>
+                <dt><span>Window Seat</span></dt>
+                <dd>
+                    <span>{{ seat.windowSeat }}</span>
+                </dd>
+                <dt><span>Middle Seat</span></dt>
+                <dd>
+                    <span>{{ seat.middleSeat }}</span>
+                </dd>
+                <dt><span>Right Seat</span></dt>
+                <dd>
+                    <div *ngIf="seat.rightSeatId">
+                        <a [routerLink]="['/seat', seat.rightSeatId, 'view']">{{ seat.rightSeatNumber }}</a>
+                    </div>
+                </dd>
+                <dt><span>Left Seat</span></dt>
+                <dd>
+                    <div *ngIf="seat.leftSeatId">
+                        <a [routerLink]="['/seat', seat.leftSeatId, 'view']">{{ seat.leftSeatNumber }}</a>
+                    </div>
+                </dd>
+                <dt><span>Front Seat</span></dt>
+                <dd>
+                    <div *ngIf="seat.frontSeatId">
+                        <a [routerLink]="['/seat', seat.frontSeatId, 'view']">{{ seat.frontSeatNumber }}</a>
+                    </div>
+                </dd>
+                <dt><span>Area</span></dt>
+                <dd>
+                    <div *ngIf="seat.areaId">
+                        <a [routerLink]="['/area', seat.areaId, 'view']">{{ seat.areaName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/seat', seat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

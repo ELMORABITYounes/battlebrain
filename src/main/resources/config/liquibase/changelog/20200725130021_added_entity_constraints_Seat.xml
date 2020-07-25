@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Seat.
+    -->
+    <changeSet id="20200725130021-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="right_seat_id"
+                                 baseTableName="seat"
+                                 constraintName="fk_seat_right_seat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seat"/>
+
+        <addForeignKeyConstraint baseColumnNames="left_seat_id"
+                                 baseTableName="seat"
+                                 constraintName="fk_seat_left_seat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seat"/>
+
+        <addForeignKeyConstraint baseColumnNames="front_seat_id"
+                                 baseTableName="seat"
+                                 constraintName="fk_seat_front_seat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seat"/>
+
+        <addForeignKeyConstraint baseColumnNames="area_id"
+                                 baseTableName="seat"
+                                 constraintName="fk_seat_area_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="area"/>
+
+    </changeSet>
+</databaseChangeLog>

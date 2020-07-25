@@ -1,0 +1,11 @@
+id;number;status;aisle_seat;window_seat;middle_seat
+1;61797;AVAILABLE;true;false;false
+2;49285;AVAILABLE;true;true;false
+3;72652;AVAILABLE;true;true;true
+4;86013;BOOKED;true;true;true
+5;38971;AVAILABLE;false;false;false
+6;84928;BOOKED;true;true;false
+7;14759;BOOKED;true;false;false
+8;71750;BOOKED;false;false;true
+9;31935;BOOKED;false;true;true
+10;84646;AVAILABLE;true;true;false

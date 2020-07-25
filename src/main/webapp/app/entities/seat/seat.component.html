@@ -1,0 +1,103 @@
+<div>
+    <h2 id="page-heading">
+        <span>Seats</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-seat" [routerLink]="['/seat/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Seat
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="seats?.length === 0">
+        <span>No seats found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="seats && seats.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="number"><span>Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="aisleSeat"><span>Aisle Seat</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="windowSeat"><span>Window Seat</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="middleSeat"><span>Middle Seat</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="rightSeatNumber"><span>Right Seat</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="leftSeatNumber"><span>Left Seat</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="frontSeatNumber"><span>Front Seat</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="areaName"><span>Area</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let seat of seats ;trackBy: trackId">
+                    <td><a [routerLink]="['/seat', seat.id, 'view']">{{ seat.id }}</a></td>
+                    <td>{{ seat.number }}</td>
+                    <td>{{ seat.status }}</td>
+                    <td>{{ seat.aisleSeat }}</td>
+                    <td>{{ seat.windowSeat }}</td>
+                    <td>{{ seat.middleSeat }}</td>
+                    <td>
+                        <div *ngIf="seat.rightSeatId">
+                            <a [routerLink]="['/seat', seat.rightSeatId , 'view']" >{{ seat.rightSeatNumber }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="seat.leftSeatId">
+                            <a [routerLink]="['/seat', seat.leftSeatId , 'view']" >{{ seat.leftSeatNumber }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="seat.frontSeatId">
+                            <a [routerLink]="['/seat', seat.frontSeatId , 'view']" >{{ seat.frontSeatNumber }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="seat.areaId">
+                            <a [routerLink]="['/area', seat.areaId , 'view']" >{{ seat.areaName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/seat', seat.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/seat', seat.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(seat)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="seats && seats.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
