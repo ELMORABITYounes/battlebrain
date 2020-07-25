@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.elmorabit.battlebrain"
+    },
+    "jhipsterVersion": "6.10.0",
+    "applicationType": "monolith",
+    "baseName": "battlebrain",
+    "packageName": "com.elmorabit.battlebrain",
+    "packageFolder": "com/elmorabit/battlebrain",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MGIzZTBjZTViODQwNmViZmY5Yjk3ODRmM2I1NGMzNjY3Yzk1MThlYTg0OGU5NDAyOWEzMjMyOGM3Mzc5NzIwZDVlZTZmYWI5ZTFiODA4MDdlYjI3ZGZjYWQ1ZTRkMjljZDBiMWQ0ODExNzliYTJlNzhlMmIzNmE4MDY3MGE1YWM=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "cerulean",
+    "clientThemeVariant": "light",
+    "creationTimestamp": 1595671696411,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
