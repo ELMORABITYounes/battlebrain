@@ -1,0 +1,58 @@
+
+
+
+entity Team {
+	name String required
+}
+
+entity Area {
+	name String required
+}
+
+entity Seat {
+    number Long required,
+    status SeatStatus,
+    aisleSeat Boolean,
+    windowSeat Boolean,
+    middleSeat Boolean
+}
+
+entity Reservation {
+	startDate Instant required,
+	endDate Instant required
+}
+
+enum SeatStatus {
+    BOOKED("Booked"), AVAILABLE("Available")
+}
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Team{members(login)} to User,
+	Seat{reservation} to Reservation{seat(number)},
+	/**
+	* A relationship
+	*/
+	Area{seats(number)} to Seat{area(name)}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship ManyToOne {
+    Reservation{collaborator(login)} to User
+}
+
+
+relationship OneToOne {
+	Seat{rightSeat(number)} to Seat,
+	Seat{leftSeat(number)} to Seat,
+	Seat{frontSeat(number)} to Seat
+}
+
+paginate Area with infinite-scroll
+paginate Seat, Reservation with pagination
+
+
+dto * with mapstruct
+
+service all with serviceImpl
