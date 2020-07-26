@@ -1,11 +1,48 @@
-id;number;status;aisle_seat;window_seat;middle_seat
-1;1;AVAILABLE;true;false;false
-2;2;AVAILABLE;true;true;false
-3;3;AVAILABLE;true;true;true
-4;4;BOOKED;true;true;true
-5;5;AVAILABLE;false;false;false
-6;6;BOOKED;true;true;false
-7;7;BOOKED;true;false;false
-8;8;BOOKED;false;false;true
-9;9;BOOKED;false;true;true
-10;10;AVAILABLE;true;true;false
+id;number;status;aisle_seat;window_seat;middle_seat ;area_id
+1;1;AVAILABLE;true;false;false                      ;1
+2;2;AVAILABLE;true;true;false                       ;1
+3;3;AVAILABLE;true;true;true                        ;1
+4;4;BOOKED;true;true;true                           ;1
+5;5;AVAILABLE;false;false;false                     ;1
+6;6;BOOKED;true;true;false                          ;1
+7;7;BOOKED;true;false;false                         ;1
+8;8;BOOKED;false;false;true                         ;1
+9;9;BOOKED;false;true;true                          ;1
+10;10;AVAILABLE;true;true;false                     ;1
+11;11;AVAILABLE;true;false;false                    ;1
+12;12;AVAILABLE;true;true;false                     ;1
+13;13;AVAILABLE;true;true;true                      ;1
+14;14;BOOKED;true;true;true                         ;1
+21;1;AVAILABLE;true;false;false                     ;3
+22;2;AVAILABLE;true;true;false                      ;3
+23;3;AVAILABLE;true;true;true                       ;3
+24;4;BOOKED;true;true;true                          ;3
+25;5;AVAILABLE;false;false;false                    ;3
+26;6;BOOKED;true;true;false                         ;3
+27;7;BOOKED;true;false;false                        ;3
+28;8;BOOKED;false;false;true                        ;3
+29;9;BOOKED;false;true;true                         ;3
+210;10;AVAILABLE;true;true;false                    ;3
+211;11;AVAILABLE;true;false;false                   ;3
+212;12;AVAILABLE;true;true;false                    ;3
+111;1;AVAILABLE;true;false;false                    ;2
+112;2;AVAILABLE;true;true;false                     ;2
+113;3;AVAILABLE;true;true;true                      ;2
+114;4;BOOKED;true;true;true                         ;2
+115;5;AVAILABLE;false;false;false                   ;2
+116;6;BOOKED;true;true;false                        ;2
+117;7;BOOKED;true;false;false                       ;2
+118;8;BOOKED;false;false;true                       ;2
+119;9;BOOKED;false;true;true                        ;2
+1110;10;AVAILABLE;true;true;false                   ;2
+1111;11;AVAILABLE;true;false;false                  ;2
+1112;12;AVAILABLE;true;true;false                   ;2
+1113;13;AVAILABLE;true;true;true                    ;2
+1114;14;BOOKED;true;true;true                       ;2
+1115;15;BOOKED;true;true;true                       ;2
+1116;16;BOOKED;true;true;true                       ;2
+1117;17;BOOKED;true;true;true                       ;2
+1118;18;BOOKED;true;true;true                       ;2
+1119;19;BOOKED;true;true;true                       ;2
+1120;20;BOOKED;true;true;true                       ;2
+

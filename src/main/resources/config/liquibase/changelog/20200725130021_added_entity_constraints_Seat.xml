@@ -7,7 +7,7 @@
         Added the constraints for entity Seat.
     -->
     <changeSet id="20200725130021-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="right_seat_id"
                                  baseTableName="seat"
                                  constraintName="fk_seat_right_seat_id"
@@ -32,5 +32,31 @@
                                  referencedColumnNames="id"
                                  referencedTableName="area"/>
 
+    </changeSet>
+
+    <changeSet id="20200725130021-1-data" author="jhipster">
+        <loadData
+            file="config/liquibase/data/seat.csv"
+            separator=";"
+            tableName="seat">
+            <column name="id" type="numeric"/>
+            <column name="number" type="numeric"/>
+            <column name="status" type="string"/>
+            <column name="aisle_seat" type="boolean"/>
+            <column name="window_seat" type="boolean"/>
+            <column name="middle_seat" type="boolean"/>
+            <column name="area_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+        <loadUpdateData
+            file="config/liquibase/data/seat-to-seat.csv"
+            separator=";"
+            tableName="seat" primaryKey="id" onlyUpdate="true">
+            <column name="id" type="numeric"/>
+            <column name="right_seat_id" type="numeric"/>
+            <column name="left_seat_id" type="numeric"/>
+            <column name="front_seat_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadUpdateData>
     </changeSet>
 </databaseChangeLog>

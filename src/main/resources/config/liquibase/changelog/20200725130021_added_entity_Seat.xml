@@ -52,27 +52,6 @@
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
-    <!--
-        Load sample data generated with Faker.js
-        - This data can be easily edited using a CSV editor (or even MS Excel) and
-          is located in the 'src/main/resources/config/liquibase/fake-data' directory
-        - By default this data is applied when running with the JHipster 'dev' profile.
-          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
-          Spring Boot configuration key.
-    -->
-    <changeSet id="20200725130021-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/data/seat.csv"
-                  separator=";"
-                  tableName="seat">
-            <column name="id" type="numeric"/>
-            <column name="number" type="numeric"/>
-            <column name="status" type="string"/>
-            <column name="aisle_seat" type="boolean"/>
-            <column name="window_seat" type="boolean"/>
-            <column name="middle_seat" type="boolean"/>
-            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
-        </loadData>
-    </changeSet>
+
 
 </databaseChangeLog>

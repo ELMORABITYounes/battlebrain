@@ -1,0 +1,48 @@
+id  ;right_seat_id ; left_seat_id;front_seat_id
+1   ;null;null;null
+2   ;null;null;null
+3   ;null;null;null
+4   ;null;null;null
+5   ;null;null;null
+6   ;null;null;null
+7   ;null;null;null
+8   ;null;null;null
+9   ;null;null;null
+10  ;null;null;null
+11  ;null;null;null
+12  ;null;null;null
+13  ;null;null;null
+14  ;null;null;null
+21  ;null;null;null
+22  ;null;null;null
+23  ;null;null;null
+24  ;null;null;null
+25  ;null;null;null
+26  ;null;null;null
+27  ;null;null;null
+28  ;null;null;null
+29  ;null;null;null
+210 ;null;null;null
+211 ;null;null;null
+212 ;null;null;null
+111 ;112 ;null;114
+112 ;113 ;111 ;115
+113 ;null;112 ;116
+114 ;115 ;null;111
+115 ;116 ;114 ;112
+116 ;null;115 ;113
+117 ;118 ;null;119
+118 ;117 ;null;1110
+119 ;null;1110;117
+1110;119 ;null;118
+1111;null;1112;1113
+1112;1111;null;1114
+1113;1114;null;1111
+1114;null;1113;1112
+1115;null;1116;1118
+1116;1115;1117;1119
+1117;1116;null;1120
+1118;1119;null;1115
+1119;1120;1118;1116
+1120;null;1119;1117
+
