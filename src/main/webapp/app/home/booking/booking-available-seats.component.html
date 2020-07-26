@@ -1,0 +1,85 @@
+
+<div class="alert alert-warning" id="no-result" *ngIf="seats?.length === 0">
+    <span>No seats are available for the shosen constraints</span>
+</div>
+
+<div class="table-responsive" id="entities" *ngIf="seats && seats.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+        <tr>
+            <th scope="col"><span>ID</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col"><span>Number</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Status</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Aisle Seat</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Window Seat</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Middle Seat</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Right Seat</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Left Seat</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" ><span>Front Seat</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col"><span>Area</span>
+                <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col">dfsfd</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let seat of seats ;trackBy: trackId">
+            <td><a [routerLink]="['/seat', seat.id, 'view']">{{ seat.id }}</a></td>
+            <td>{{ seat.number }}</td>
+            <td>{{ seat.status }}</td>
+            <td>{{ seat.aisleSeat }}</td>
+            <td>{{ seat.windowSeat }}</td>
+            <td>{{ seat.middleSeat }}</td>
+            <td>
+                <div *ngIf="seat.rightSeatId">
+                    <a [routerLink]="['/seat', seat.rightSeatId , 'view']">{{ seat.rightSeatNumber }}</a>
+                </div>
+            </td>
+            <td>
+                <div *ngIf="seat.leftSeatId">
+                    <a [routerLink]="['/seat', seat.leftSeatId , 'view']">{{ seat.leftSeatNumber }}</a>
+                </div>
+            </td>
+            <td>
+                <div *ngIf="seat.frontSeatId">
+                    <a [routerLink]="['/seat', seat.frontSeatId , 'view']">{{ seat.frontSeatNumber }}</a>
+                </div>
+            </td>
+            <td>
+                <div *ngIf="seat.areaId">
+                    <a [routerLink]="['/area', seat.areaId , 'view']">{{ seat.areaName }}</a>
+                </div>
+            </td>
+            <td class="text-right">
+                <div class="btn-group">
+
+                    <button type="submit"
+                            (click)="bookSeat(seat)"
+                            class="btn btn-primary btn-sm">
+                        <fa-icon icon="book"></fa-icon>
+                        <span class="d-none d-md-inline">Book</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

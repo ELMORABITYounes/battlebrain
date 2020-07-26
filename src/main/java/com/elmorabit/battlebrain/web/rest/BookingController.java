@@ -2,6 +2,7 @@ package com.elmorabit.battlebrain.web.rest;
 
 import com.elmorabit.battlebrain.service.BookingService;
 import com.elmorabit.battlebrain.service.dto.BookingDTO;
+import com.elmorabit.battlebrain.service.dto.ReservationDTO;
 import com.elmorabit.battlebrain.service.dto.SeatDTO;
 
 
@@ -58,4 +59,7 @@ public class BookingController {
         List<SeatDTO> result = bookingService.getAllAvailableSeats(bookingDTO);
         return ResponseEntity.ok(result);
     }
+
+
+
 }

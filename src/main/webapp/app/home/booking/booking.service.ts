@@ -8,6 +8,9 @@ import { ISeat } from '../../shared/model/seat.model';
   providedIn: 'root',
 })
 export class BookingService {
+  availableSeats?: ISeat[] = [];
+  bookingForm: any;
+
   constructor(private http: HttpClient) {}
 
   getAvailableSeats(bookingForm: any): Observable<ISeat[]> {

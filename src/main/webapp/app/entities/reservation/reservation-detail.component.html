@@ -10,11 +10,11 @@
             <dl class="row-md jh-entity-details">
                 <dt><span>Start Date</span></dt>
                 <dd>
-                    <span>{{ reservation.startDate }}</span>
+                    <span>{{ reservation.startDate | date : "full"}}</span>
                 </dd>
                 <dt><span>End Date</span></dt>
                 <dd>
-                    <span>{{ reservation.endDate }}</span>
+                    <span>{{ reservation.endDate | date : "full"}}</span>
                 </dd>
                 <dt><span>Collaborator</span></dt>
                 <dd>
@@ -34,7 +34,7 @@
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
-            <button type="button"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
                     [routerLink]="['/reservation', reservation.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>

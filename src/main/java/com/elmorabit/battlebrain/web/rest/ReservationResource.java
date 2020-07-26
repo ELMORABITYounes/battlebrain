@@ -93,9 +93,8 @@ public class ReservationResource {
     @GetMapping("/reservations")
     public ResponseEntity<List<ReservationDTO>> getAllReservations(Pageable pageable) {
         log.debug("REST request to get a page of Reservations");
-        Page<ReservationDTO> page = reservationService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<ReservationDTO> reservationDTOS= reservationService.findAll();
+        return ResponseEntity.ok(reservationDTOS);
     }
 
     /**

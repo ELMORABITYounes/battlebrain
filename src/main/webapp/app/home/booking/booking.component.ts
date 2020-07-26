@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ISeat } from '../../shared/model/seat.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { HttpResponse } from '@angular/common/http';
 import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
@@ -25,10 +25,13 @@ export class BookingComponent implements OnInit {
     areaId: [null],
   });
 
+  bookingInfos: any;
+
   constructor(
     protected bookingService: BookingService,
     protected areaService: AreaService,
     protected activatedRoute: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -42,27 +45,27 @@ export class BookingComponent implements OnInit {
 
   submit(): void {
     this.isSaving = true;
-    this.subscribeToSaveResponse(
-      this.bookingService.getAvailableSeats({
-        startDate: this.bookingForm.get(['startDate'])!.value
-          ? moment(this.bookingForm.get(['startDate'])!.value, DATE_TIME_FORMAT)
-          : undefined,
-        endDate: this.bookingForm.get(['endDate'])!.value ? moment(this.bookingForm.get(['endDate'])!.value, DATE_TIME_FORMAT) : undefined,
-        areaId: this.bookingForm.get(['areaId'])!.value,
-      })
-    );
+    this.bookingInfos = {
+      startDate: this.bookingForm.get(['startDate'])!.value
+        ? moment(this.bookingForm.get(['startDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      endDate: this.bookingForm.get(['endDate'])!.value ? moment(this.bookingForm.get(['endDate'])!.value, DATE_TIME_FORMAT) : undefined,
+      areaId: this.bookingForm.get(['areaId'])!.value,
+    };
+    this.subscribeToSaveResponse(this.bookingService.getAvailableSeats(this.bookingInfos));
   }
 
   protected subscribeToSaveResponse(result: Observable<ISeat[]>): void {
     result.subscribe(
-      () => this.onSaveSuccess(),
+      availableSeats => this.onSaveSuccess(availableSeats),
       () => this.onSaveError()
     );
   }
 
-  protected onSaveSuccess(): void {
-    this.isSaving = false;
-    this.previousState();
+  protected onSaveSuccess(availableSeats: ISeat[]): void {
+    this.bookingService.availableSeats = availableSeats;
+    this.bookingService.bookingForm = this.bookingInfos;
+    this.router.navigate(['booking/available-seats']);
   }
 
   protected onSaveError(): void {

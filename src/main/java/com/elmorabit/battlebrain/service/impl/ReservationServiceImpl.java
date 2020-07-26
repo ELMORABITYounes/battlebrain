@@ -3,17 +3,19 @@ package com.elmorabit.battlebrain.service.impl;
 import com.elmorabit.battlebrain.service.ReservationService;
 import com.elmorabit.battlebrain.domain.Reservation;
 import com.elmorabit.battlebrain.repository.ReservationRepository;
+import com.elmorabit.battlebrain.service.UserService;
 import com.elmorabit.battlebrain.service.dto.ReservationDTO;
 import com.elmorabit.battlebrain.service.mapper.ReservationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Reservation}.
@@ -28,14 +30,20 @@ public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationMapper reservationMapper;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, ReservationMapper reservationMapper) {
+    private final UserService userService;
+
+    public ReservationServiceImpl(ReservationRepository reservationRepository, ReservationMapper reservationMapper, final UserService userService) {
         this.reservationRepository = reservationRepository;
         this.reservationMapper = reservationMapper;
+        this.userService = userService;
     }
 
     @Override
     public ReservationDTO save(ReservationDTO reservationDTO) {
         log.debug("Request to save Reservation : {}", reservationDTO);
+        if (reservationDTO.getCollaboratorId() == null) {
+            userService.getUserWithAuthorities().ifPresent(user -> reservationDTO.setCollaboratorId(user.getId()));
+        }
         Reservation reservation = reservationMapper.toEntity(reservationDTO);
         reservation = reservationRepository.save(reservation);
         return reservationMapper.toDto(reservation);
@@ -43,10 +51,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ReservationDTO> findAll(Pageable pageable) {
+    public List<ReservationDTO> findAll() {
         log.debug("Request to get all Reservations");
-        return reservationRepository.findAll(pageable)
-            .map(reservationMapper::toDto);
+        return reservationRepository.findByCollaboratorIsCurrentUser().stream().map(reservationMapper::toDto).collect(Collectors.toList());
     }
 
 

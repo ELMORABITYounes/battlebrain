@@ -1,6 +1,7 @@
 package com.elmorabit.battlebrain.service;
 
 import com.elmorabit.battlebrain.service.dto.BookingDTO;
+import com.elmorabit.battlebrain.service.dto.ReservationDTO;
 import com.elmorabit.battlebrain.service.dto.SeatDTO;
 
 import java.util.List;

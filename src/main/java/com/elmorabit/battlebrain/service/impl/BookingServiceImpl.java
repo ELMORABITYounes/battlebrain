@@ -2,6 +2,7 @@ package com.elmorabit.battlebrain.service.impl;
 
 import com.elmorabit.battlebrain.domain.Reservation;
 import com.elmorabit.battlebrain.domain.Seat;
+import com.elmorabit.battlebrain.domain.enumeration.SeatStatus;
 import com.elmorabit.battlebrain.repository.ReservationRepository;
 import com.elmorabit.battlebrain.repository.SeatRepository;
 import com.elmorabit.battlebrain.service.BookingService;
@@ -55,6 +56,26 @@ public class BookingServiceImpl implements BookingService {
             seatList = seatRepository.findAll();
         }
 
-        return seatList.stream().map(seatMapper::toDto).collect(Collectors.toList());
+        final List<Seat> collect = seatList.stream().filter(seat -> isSeatAvailable(bookingDTO, seat, true)).collect(Collectors.toList());
+
+        return collect.stream().map(seatMapper::toDto).collect(Collectors.toList());
+    }
+
+    private boolean isSeatAvailable(final BookingDTO bookingDTO, final Seat seat, boolean firstLevel) {
+        if (seat.getStatus() == SeatStatus.AVAILABLE) {
+            return true;
+        } else if (seat.getStatus() == SeatStatus.UNSET) {
+            for (Reservation reservation : seat.getReservations()) {
+                if (!reservation.getStartDate().isAfter(bookingDTO.getEndDate()) && !reservation.getEndDate().isBefore(bookingDTO.getStartDate())) {
+                    return false;
+                }
+            }
+            if (firstLevel) {
+                return isSeatAvailable(bookingDTO, seat.getFrontSeat(), false) && isSeatAvailable(bookingDTO, seat.getLeftSeat(), false) && isSeatAvailable(bookingDTO, seat.getRightSeat(), false);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }
