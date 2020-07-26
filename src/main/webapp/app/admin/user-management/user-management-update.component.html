@@ -89,6 +89,14 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_team">Team</label>
+                    <select class="form-control" id="field_team" name="teamId" formControlName="teamId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teamOption.id" *ngFor="let teamOption of teams; trackBy: trackById">{{ teamOption.name }}</option>
+                    </select>
+                </div>
+
                 <div class="form-check">
                     <label class="form-check-label" for="activated">
                         <input class="form-check-input" [attr.disabled]="user.id === undefined ? 'disabled' : null"

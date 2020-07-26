@@ -21,6 +21,8 @@
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200725130021_added_entity_constraints_Seat.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200725130121_added_entity_constraints_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200725164916_added_team_id_column_User.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200725164916_added_entity_constraints_User.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

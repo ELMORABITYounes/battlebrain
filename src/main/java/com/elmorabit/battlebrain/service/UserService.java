@@ -4,6 +4,7 @@ import com.elmorabit.battlebrain.config.Constants;
 import com.elmorabit.battlebrain.domain.Authority;
 import com.elmorabit.battlebrain.domain.User;
 import com.elmorabit.battlebrain.repository.AuthorityRepository;
+import com.elmorabit.battlebrain.repository.TeamRepository;
 import com.elmorabit.battlebrain.repository.UserRepository;
 import com.elmorabit.battlebrain.security.AuthoritiesConstants;
 import com.elmorabit.battlebrain.security.SecurityUtils;
@@ -41,13 +42,16 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
+    private final TeamRepository teamRepository;
+
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, TeamRepository teamRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.teamRepository = teamRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -127,7 +131,7 @@ public class UserService {
 
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
-             return false;
+            return false;
         }
         userRepository.delete(existingUser);
         userRepository.flush();
@@ -162,6 +166,11 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
+
+        if (Objects.nonNull(userDTO.getTeamId())) {
+            teamRepository.findById(userDTO.getTeamId()).ifPresent(user::setTeam);
+        }
+
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
@@ -260,13 +269,13 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> getUserWithAuthoritiesByLogin(String login) {
-        return userRepository.findOneWithAuthoritiesByLogin(login);
+    public Optional<User> getUserWithAuthoritiesWithTeamByLogin(String login) {
+        return userRepository.findOneWithAuthoritiesWithTeamByLogin(login);
     }
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities() {
-        return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
+        return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesWithTeamByLogin);
     }
 
     /**
@@ -287,6 +296,7 @@ public class UserService {
 
     /**
      * Gets a list of all the authorities.
+     *
      * @return a list of all the authorities.
      */
     @Transactional(readOnly = true)

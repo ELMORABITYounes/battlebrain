@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { ITeam } from '../../shared/model/team.model';
+import { TeamService } from '../../entities/team/team.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-user-mgmt-update',
@@ -13,6 +16,7 @@ export class UserManagementUpdateComponent implements OnInit {
   user!: User;
   authorities: string[] = [];
   isSaving = false;
+  teams: ITeam[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -31,9 +35,15 @@ export class UserManagementUpdateComponent implements OnInit {
     activated: [],
     langKey: [],
     authorities: [],
+    teamId: [],
   });
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private userService: UserService,
+    protected teamService: TeamService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ user }) => {
@@ -48,6 +58,7 @@ export class UserManagementUpdateComponent implements OnInit {
     this.userService.authorities().subscribe(authorities => {
       this.authorities = authorities;
     });
+    this.teamService.query().subscribe((res: HttpResponse<ITeam[]>) => (this.teams = res.body || []));
   }
 
   previousState(): void {
@@ -81,6 +92,7 @@ export class UserManagementUpdateComponent implements OnInit {
       activated: user.activated,
       langKey: user.langKey,
       authorities: user.authorities,
+      teamId: user.teamId,
     });
   }
 
@@ -92,6 +104,7 @@ export class UserManagementUpdateComponent implements OnInit {
     user.activated = this.editForm.get(['activated'])!.value;
     user.langKey = this.editForm.get(['langKey'])!.value;
     user.authorities = this.editForm.get(['authorities'])!.value;
+    user.teamId = this.editForm.get(['teamId'])!.value;
   }
 
   private onSaveSuccess(): void {
@@ -101,5 +114,9 @@ export class UserManagementUpdateComponent implements OnInit {
 
   private onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: ITeam): any {
+    return item.id;
   }
 }

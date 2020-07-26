@@ -7,6 +7,7 @@ import com.elmorabit.battlebrain.domain.User;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Long teamId;
+    private String teamName;
+
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -70,6 +75,10 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        if (Objects.nonNull(user.getTeam())) {
+            this.teamId = user.getTeam().getId();
+            this.teamName = user.getTeam().getName();
+        }
     }
 
     public Long getId() {
@@ -174,6 +183,23 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     // prettier-ignore
