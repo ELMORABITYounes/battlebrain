@@ -5,7 +5,8 @@ package com.elmorabit.battlebrain.domain.enumeration;
  */
 public enum SeatStatus {
     BOOKED("Booked"),
-    AVAILABLE("Available");
+    AVAILABLE("Available"),
+    UNSET("Unset");
 
     private final String value;
 

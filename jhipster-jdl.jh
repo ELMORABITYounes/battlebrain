@@ -14,8 +14,7 @@ entity Seat {
     status SeatStatus,
     aisleSeat Boolean,
     windowSeat Boolean,
-    middleSeat Boolean,
-    tempAttribute String
+    middleSeat Boolean
 }
 
 entity Reservation {
@@ -24,17 +23,13 @@ entity Reservation {
 }
 
 enum SeatStatus {
-    BOOKED("Booked"), AVAILABLE("Available")
-}
-
-entity TempUser{
- login String
+    BOOKED("Booked"), AVAILABLE("Available"), UNSET("Unset")
 }
 
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Team{members(login)} to TempUser,
+	Team{members(login)} to User,
 	Seat{reservation} to Reservation{seat(number)},
 	/**
 	* A relationship

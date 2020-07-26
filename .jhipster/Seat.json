@@ -9,7 +9,7 @@
     {
       "fieldName": "status",
       "fieldType": "SeatStatus",
-      "fieldValues": "BOOKED (Booked),AVAILABLE (Available)"
+      "fieldValues": "BOOKED (Booked),AVAILABLE (Available),UNSET (Unset)"
     },
     {
       "fieldName": "aisleSeat",
